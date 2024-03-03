@@ -109,8 +109,9 @@ public class TelaInfoPerson extends AppCompatActivity {
             e.printStackTrace();
         }finally {
         // Certifique-se de fechar o banco após o uso
-        if (banco != null && banco.isOpen()) {
-            banco.close();
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
         }
     }
 
@@ -197,8 +198,9 @@ public class TelaInfoPerson extends AppCompatActivity {
             e.printStackTrace();
         }finally {
         // Certifique-se de fechar o banco após o uso
-        if (banco != null && banco.isOpen()) {
-            banco.close();
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
         }
     }
 
@@ -234,8 +236,9 @@ public class TelaInfoPerson extends AppCompatActivity {
             e.printStackTrace();
         }finally {
         // Certifique-se de fechar o banco após o uso
-        if (banco != null && banco.isOpen()) {
-            banco.close();
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
         }
     }
 
