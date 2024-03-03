@@ -103,11 +103,14 @@ public class TelaInfoPerson extends AppCompatActivity {
             SQLiteStatement stmt = banco.compileStatement(sql);
             stmt.bindLong(1, id);
             stmt.executeUpdateDelete();
-            banco.close();
 
             Toast.makeText(this, "Viagem excluida com sucesso.", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+        if (banco != null && banco.isOpen()) {
+            banco.close();
         }
     }
 
@@ -189,10 +192,13 @@ public class TelaInfoPerson extends AppCompatActivity {
             ArrayAdapter<HistoricoDeViagem> adapter = new AdpterTuplaHistoricoTelaInfo(this, viagens);
             listViewHistorico.setAdapter(adapter);
 
-            banco.close();
         }catch (Exception e){
             Toast.makeText(this, "erro: listarInformacoes", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+        if (banco != null && banco.isOpen()) {
+            banco.close();
         }
     }
 
@@ -223,10 +229,13 @@ public class TelaInfoPerson extends AppCompatActivity {
         try {
             banco = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
             banco.execSQL("DELETE FROM TB_VIAGEM where id_pessoa = "+ pessoa.getId_pessoa() +";");
-            banco.close();
         }catch (Exception e){
             Toast.makeText(this, "erro: quitarDivida()", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+        if (banco != null && banco.isOpen()) {
+            banco.close();
         }
     }
 
