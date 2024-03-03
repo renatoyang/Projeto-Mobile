@@ -93,11 +93,15 @@ public class TelaContatos extends AppCompatActivity {
             txtNumContatos.setText(pessoas.size() + " pessoas cadastradas");
             listPessoas.setAdapter(adapter);
 
-            banco.close();
         }catch (Exception e){
             Toast.makeText(this, "erro: listarPessoas()", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+		}
     }
 
     @Override
@@ -117,11 +121,15 @@ public class TelaContatos extends AppCompatActivity {
             banco = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
             banco.execSQL("DELETE FROM TB_VIAGEM;");
             banco.execSQL("DELETE FROM TB_PESSOA;");
-            banco.close();
         }catch (Exception e){
             Toast.makeText(this, "erro: deletarTudo()", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+		}
     }
 
     public void confirmacao(){
