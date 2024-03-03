@@ -90,12 +90,16 @@ public class TelaDiaria extends AppCompatActivity {
                 } while (meuCursor.moveToNext());
 
                 listviewCorridasDiaria.setAdapter(tupla_adapter);
-                banco.close();
             }
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+		}
 
         return tupla_adapter;
     }
@@ -143,9 +147,13 @@ public class TelaDiaria extends AppCompatActivity {
                         stmt.executeInsert();
                     }
 
-                    banco.close();
                 }catch (Exception e){
                     e.printStackTrace();
+                }finally {
+                    // Certifique-se de fechar o banco após o uso
+                    if (banco != null && banco.isOpen()) {
+                        banco.close();
+                    }
                 }
             }
 
