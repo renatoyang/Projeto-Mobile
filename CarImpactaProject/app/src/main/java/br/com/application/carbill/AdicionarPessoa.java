@@ -71,11 +71,15 @@ public class AdicionarPessoa extends AppCompatActivity {
                 stmt.bindString(7, strNumero);
                 stmt.bindString(8, strValorPagoPorViagem);
                 stmt.executeInsert();
-                banco.close();
                 Toast.makeText(this, "Cadastro realizado com sucesso.", Toast.LENGTH_SHORT).show();
                 limparCampodeTexto();
             }catch (Exception e){
                 e.printStackTrace();
+            }finally {
+                // Certifique-se de fechar o banco após o uso
+                if (banco != null && banco.isOpen()) {
+                    banco.close();
+                }
             }
         }
     }
