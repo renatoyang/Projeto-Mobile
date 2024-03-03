@@ -117,10 +117,14 @@ public class MainActivity extends AppCompatActivity {
                     "tipo VARCHAR(10) NOT NULL " +
                     ");");
 
-            banco.close();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+		}
     }
 
     public void listarDadosTelaInicial(){
@@ -158,11 +162,15 @@ public class MainActivity extends AppCompatActivity {
             listviewTelaInicial.setAdapter(adapter);
             String valorFormatado = NumberFormat.getCurrencyInstance().format(total_das_dividas);
             textValorTotal.setText("TOTAL\n" + valorFormatado);
-            banco.close();
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+			}
+		}
     }
 
     @Override
@@ -177,11 +185,15 @@ public class MainActivity extends AppCompatActivity {
                 banco = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
                 banco.execSQL("INSERT INTO tb_tipo (tipo) VALUES ('IDA');");
                 banco.execSQL("INSERT INTO tb_tipo (tipo) VALUES ('VOLTA');");
-                banco.close();
 //                Toast.makeText(this, "Tipos de viagem adicionados.", Toast.LENGTH_SHORT).show();
             }catch (Exception e){
                 Toast.makeText(this, "erro: insetTiposViagem()", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
+            }finally {
+            // Certifique-se de fechar o banco após o uso
+                if (banco != null && banco.isOpen()) {
+                    banco.close();
+                }
             }
         }
     }
@@ -213,10 +225,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             cursor.close();
-            banco.close();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+		}
         return isEmpty;
     }
     
