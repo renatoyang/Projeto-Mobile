@@ -107,10 +107,14 @@ public class Tela_infos_do_cadastro extends AppCompatActivity {
                 }while (cursor.moveToNext());
             }
 
-            banco.close();
         }catch (Exception e){
             Toast.makeText(this, "erro: acessobanco()", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
         }
     }
 
@@ -172,9 +176,13 @@ public class Tela_infos_do_cadastro extends AppCompatActivity {
             if(deve > 0)
                 temDivida = true;
 
-            banco.close();
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
         }
 
         return temDivida;
@@ -186,10 +194,14 @@ public class Tela_infos_do_cadastro extends AppCompatActivity {
 
             banco.execSQL("DELETE FROM TB_PESSOA WHERE id_pessoa = " + pessoa.getId());
 
-            banco.close();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+            }
+	    }
     }
 
     public void updatePessoa(){
@@ -244,10 +256,14 @@ public class Tela_infos_do_cadastro extends AppCompatActivity {
             stmt.bindLong(2, pessoa.getId());
             stmt.executeUpdateDelete();
 
-            banco.close();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }finally {
+        // Certifique-se de fechar o banco após o uso
+            if (banco != null && banco.isOpen()) {
+                banco.close();
+			}
+		}
     }
 
     @Override
